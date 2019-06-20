@@ -2,8 +2,8 @@ const http = require('http');
 
 const express = require('express');
 
-console.log();
+const app = express();
 
-const server = http.createServer();
+const server = http.createServer(app);
 
 server.listen(3000);
