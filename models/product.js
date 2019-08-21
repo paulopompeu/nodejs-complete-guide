@@ -7,7 +7,7 @@ class Product {
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
-    this._id = id;
+    this._id = id ? new mongodb.ObjectId(id) : null;
   }
 
   save() {
@@ -16,8 +16,8 @@ class Product {
     if (this._id) {
       // Update the product
       dbOp = db
-        .collection('products')
-        .updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: this });
+      .collection('products')
+      .updateOne({ _id: this._id }, { $set: this });
     } else {
       dbOp = db.collection('products').insertOne(this);
     }
@@ -37,7 +37,7 @@ class Product {
     .find()
     .toArray()
     .then(products => {
-      console.log(products);
+      // console.log(products);
       return products;
     })
     .catch(err => {

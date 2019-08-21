@@ -1,10 +1,11 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
+const { username, password } = require('../credentials/mongodb-atlas.json')
 
 let _db;
 
 const mongoConnect = (callback) => {
-  MongoClient.connect('mongodb+srv://meumongodb:minhasenha@cluster0-euas3.mongodb.net/shop?retryWrites=true&w=majority', {
+  MongoClient.connect(`mongodb+srv://${username}:${password}@cluster0-euas3.mongodb.net/shop?retryWrites=true&w=majority`, {
     useNewUrlParser: true
   })
   .then(client => { 
